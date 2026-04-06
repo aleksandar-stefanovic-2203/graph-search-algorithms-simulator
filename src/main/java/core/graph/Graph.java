@@ -1,4 +1,4 @@
-package graph;
+package core.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,6 +7,16 @@ import java.util.Map;
 
 public class Graph {
 	
+	public Graph() {}
+	
+	public Map<String, List<Neighbor>> getAdjacencyList() {
+		return adjacencyList;
+	}
+
+	public void setAdjacencyList(Map<String, List<Neighbor>> adjacencyList) {
+		this.adjacencyList = adjacencyList;
+	}
+
 	public List<Neighbor> getNeighbors(String node) {
 		checkNodeFields(true, node);
 		
@@ -79,4 +89,5 @@ public class Graph {
 	}
 	
 	private Map<String, List<Neighbor>> adjacencyList = new HashMap<>();
+	
 }

@@ -1,4 +1,4 @@
-package graph;
+package core.graph;
 
 public class Neighbor {
 	
@@ -10,7 +10,11 @@ public class Neighbor {
 		return weight;
 	}
 	
-	void setWeight(int weight) {
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public void setWeight(int weight) {
 		if(weight < 1) throw new IllegalArgumentException("Weight argument must be a whole number greater than or equal to 1.");
 		this.weight = weight;
 	}
@@ -20,11 +24,15 @@ public class Neighbor {
 		return String.format("(%s, %d)", destination, weight);
 	}
 	
-	Neighbor(String destination, int weight) {
+	public Neighbor() {
+		
+	}
+	
+	public Neighbor(String destination, int weight) {
 		this.destination = destination;
 		this.weight = weight;
 	}
 	
-	private final String destination;
+	private String destination;
 	private int weight;
 }

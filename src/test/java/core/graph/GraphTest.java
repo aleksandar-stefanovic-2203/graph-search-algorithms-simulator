@@ -1,4 +1,4 @@
-package graph;
+package core.graph;
 
 import org.junit.jupiter.api.Test;
 
