@@ -16,7 +16,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class IOTest {
+class JSONIOTest {
 
 	private static void assertGraphEquals(Graph expected, Graph actual) {
 		assertEquals(expected.getAdjacencyList().keySet(), actual.getAdjacencyList().keySet());
