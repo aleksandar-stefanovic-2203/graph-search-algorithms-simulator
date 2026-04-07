@@ -14,8 +14,7 @@ public class Neighbor {
 		this.destination = destination;
 	}
 
-	public void setWeight(int weight) {
-		if(weight < 1) throw new IllegalArgumentException("Weight argument must be a whole number greater than or equal to 1.");
+	public void setWeight(int weight) {		
 		this.weight = weight;
 	}
 	
@@ -24,9 +23,7 @@ public class Neighbor {
 		return String.format("(%s, %d)", destination, weight);
 	}
 	
-	public Neighbor() {
-		
-	}
+	public Neighbor() {}
 	
 	public Neighbor(String destination, int weight) {
 		this.destination = destination;

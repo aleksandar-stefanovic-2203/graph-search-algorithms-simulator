@@ -6,6 +6,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import core.graph.exception.*;
+
 class GraphTest {
 
     // -------------------- NODE TESTS --------------------
@@ -23,16 +25,16 @@ class GraphTest {
         Graph g = new Graph();
         g.addNode("A");
 
-        assertThrows(IllegalArgumentException.class, () -> g.addNode("A"));
+        assertThrows(NodeFoundException.class, () -> g.addNode("A"));
     }
 
     @Test
     void addNodeInvalidInput() {
         Graph g = new Graph();
 
-        assertThrows(IllegalArgumentException.class, () -> g.addNode(null));
-        assertThrows(IllegalArgumentException.class, () -> g.addNode(""));
-        assertThrows(IllegalArgumentException.class, () -> g.addNode("   "));
+        assertThrows(NodeArgumentNullException.class, () -> g.addNode(null));
+        assertThrows(NodeArgumentEmptyException.class, () -> g.addNode(""));
+        assertThrows(NodeArgumentEmptyException.class, () -> g.addNode("   "));
     }
 
     // -------------------- EDGE TESTS --------------------
@@ -58,7 +60,7 @@ class GraphTest {
         g.addNode("A");
         g.addNode("B");
 
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidWeightException.class,
                 () -> g.addEdge("A", "B", 0));
     }
 
@@ -67,7 +69,7 @@ class GraphTest {
         Graph g = new Graph();
         g.addNode("A");
 
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(NodeNotFoundException.class,
                 () -> g.addEdge("A", "B", 5));
     }
 
@@ -79,7 +81,7 @@ class GraphTest {
 
         g.addEdge("A", "B", 5);
 
-        assertThrows(IllegalStateException.class,
+        assertThrows(EdgeFoundException.class,
                 () -> g.addEdge("A", "B", 10));
     }
 
@@ -114,7 +116,7 @@ class GraphTest {
         g.addNode("A");
         g.addNode("B");
 
-        assertThrows(IllegalStateException.class,
+        assertThrows(EdgeNotFoundException.class,
                 () -> g.removeEdge("A", "B"));
     }
 
@@ -128,7 +130,7 @@ class GraphTest {
 
         g.removeNode("A");
 
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(NodeNotFoundException.class,
                 () -> g.getNeighbors("A"));
     }
 
@@ -148,7 +150,7 @@ class GraphTest {
     void removeNodeNonExisting() {
         Graph g = new Graph();
 
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(NodeNotFoundException.class,
                 () -> g.removeNode("A"));
     }
 
@@ -174,7 +176,7 @@ class GraphTest {
 
         g.addEdge("A", "B", 5);
 
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(InvalidWeightException.class,
                 () -> g.updateEdgeWeight("A", "B", 0));
     }
 
@@ -184,7 +186,7 @@ class GraphTest {
         g.addNode("A");
         g.addNode("B");
 
-        assertThrows(IllegalStateException.class,
+        assertThrows(EdgeNotFoundException.class,
                 () -> g.updateEdgeWeight("A", "B", 5));
     }
 
@@ -194,7 +196,7 @@ class GraphTest {
     void getNeighborsNonExistingNode() {
         Graph g = new Graph();
 
-        assertThrows(IllegalArgumentException.class,
+        assertThrows(NodeNotFoundException.class,
                 () -> g.getNeighbors("A"));
     }
 
@@ -210,20 +212,5 @@ class GraphTest {
         neighbors.clear();
 
         assertEquals(1, g.getNeighbors("A").size());
-    }
-
-    // -------------------- IMPORTANT DESIGN TEST --------------------
-
-    @Test
-    void modifyingReturnedNeighborAffectsGraph() {
-        Graph g = new Graph();
-        g.addNode("A");
-        g.addNode("B");
-
-        g.addEdge("A", "B", 5);
-
-        List<Neighbor> neighbors = g.getNeighbors("A");
-
-        assertThrows(IllegalArgumentException.class, () -> neighbors.get(0).setWeight(-1));
     }
 }

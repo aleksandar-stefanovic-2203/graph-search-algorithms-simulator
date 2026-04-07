@@ -5,6 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import core.graph.exception.EdgeFoundException;
+import core.graph.exception.EdgeNotFoundException;
+import core.graph.exception.InvalidWeightException;
+import core.graph.exception.NodeArgumentEmptyException;
+import core.graph.exception.NodeArgumentNullException;
+import core.graph.exception.NodeFoundException;
+import core.graph.exception.NodeNotFoundException;
+
 public class Graph {
 	
 	public Graph() {}
@@ -29,13 +37,13 @@ public class Graph {
 		adjacencyList.put(node, new ArrayList<>());
 	}
 	
-	public void addEdge(String start, String end, int weight) {
-		if(weight < 1) throw new IllegalArgumentException("Weight argument must be a whole number greater than or equal to 1.");
-		checkNodeFields(true, start, end);
+	public void addEdge(String startNode, String endNode, int weight) {
+		if(weight < 1) throw new InvalidWeightException();
+		checkNodeFields(true, startNode, endNode);
 		
-		List<Neighbor> neighbors = adjacencyList.get(start);
-		if(checkIfNeighborExists(neighbors, end) != null) throw new IllegalStateException(String.format("Edge (%s, %s) already exists in graph.", start, end));
-		neighbors.add(new Neighbor(end, weight));
+		List<Neighbor> neighbors = adjacencyList.get(startNode);
+		if(checkIfNeighborExists(neighbors, endNode) != null) throw new EdgeFoundException(startNode, endNode);
+		neighbors.add(new Neighbor(endNode, weight));
 	}
 	
 	public void removeNode(String node) {
@@ -48,23 +56,23 @@ public class Graph {
 		}
 	}
 	
-	public void removeEdge(String start, String end) {
-		checkNodeFields(true, start, end);
+	public void removeEdge(String startNode, String endNode) {
+		checkNodeFields(true, startNode, endNode);
 		
-		List<Neighbor> neighbors = adjacencyList.get(start);
-		Neighbor neighbor = checkIfNeighborExists(neighbors, end);
-		if(neighbor == null) throw new IllegalStateException(String.format("Edge (%s, %s) doesn't exist in graph.", start, end));
+		List<Neighbor> neighbors = adjacencyList.get(startNode);
+		Neighbor neighbor = checkIfNeighborExists(neighbors, endNode);
+		if(neighbor == null) throw new EdgeNotFoundException(startNode, endNode);
 		
 		neighbors.remove(neighbor);
 	}
 	
-	public void updateEdgeWeight(String start, String end, int weight) {
-		if(weight < 1) throw new IllegalArgumentException("Weight argument must be a whole number greater than or equal to 1.");
-		checkNodeFields(true, start, end);
+	public void updateEdgeWeight(String startNode, String endNode, int weight) {
+		if(weight < 1) throw new InvalidWeightException();
+		checkNodeFields(true, startNode, endNode);
 		
-		List<Neighbor> neighbors = adjacencyList.get(start);
-		Neighbor neighbor = checkIfNeighborExists(neighbors, end);
-		if(neighbor == null) throw new IllegalStateException(String.format("Edge (%s, %s) doesn't exist in graph.", start, end));
+		List<Neighbor> neighbors = adjacencyList.get(startNode);
+		Neighbor neighbor = checkIfNeighborExists(neighbors, endNode);
+		if(neighbor == null) throw new EdgeNotFoundException(startNode, endNode);
 		
 		neighbor.setWeight(weight);
 	}
@@ -81,10 +89,10 @@ public class Graph {
 	
 	protected void checkNodeFields(boolean exists, String... nodes) {
 		for(int i = 0; i < nodes.length; i++) {
-			if(nodes[i] == null) throw new IllegalArgumentException(String.format("Node argument at position %d cannot be null.", i));
-			if(nodes[i].trim().isEmpty()) throw new IllegalArgumentException(String.format("Node argument at position %d cannot be an empty string.", i));
-			if(exists && !adjacencyList.containsKey(nodes[i])) throw new IllegalArgumentException(String.format("Node %s doesn't exist in graph.", nodes[i]));
-			if(!exists && adjacencyList.containsKey(nodes[i])) throw new IllegalArgumentException(String.format("Node %s already exists in graph.", nodes[i]));
+			if(nodes[i] == null) throw new NodeArgumentNullException(i);
+			if(nodes[i].trim().isEmpty()) throw new NodeArgumentEmptyException(i);
+			if(exists && !adjacencyList.containsKey(nodes[i])) throw new NodeNotFoundException(nodes[i]);
+			if(!exists && adjacencyList.containsKey(nodes[i])) throw new NodeFoundException(nodes[i]);
 		}
 	}
 	
