@@ -27,6 +27,4 @@ public class JSONGraphIO extends GraphIO {
 	private static final JSONGraphIO instance = new JSONGraphIO();
 	private JSONGraphIO() {}
 	
-	
-	
 }
