@@ -1,4 +1,4 @@
-package core.graph.exception;
+package model.graph.exception;
 
 @SuppressWarnings("serial")
 public class NodeArgumentEmptyException extends RuntimeException {

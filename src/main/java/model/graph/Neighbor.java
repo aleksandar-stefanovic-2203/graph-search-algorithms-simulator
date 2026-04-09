@@ -1,4 +1,4 @@
-package core.graph;
+package model.graph;
 
 public class Neighbor {
 	

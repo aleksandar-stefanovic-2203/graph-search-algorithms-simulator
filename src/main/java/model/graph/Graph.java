@@ -1,17 +1,17 @@
-package core.graph;
+package model.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import core.graph.exception.EdgeFoundException;
-import core.graph.exception.EdgeNotFoundException;
-import core.graph.exception.InvalidWeightException;
-import core.graph.exception.NodeArgumentEmptyException;
-import core.graph.exception.NodeArgumentNullException;
-import core.graph.exception.NodeFoundException;
-import core.graph.exception.NodeNotFoundException;
+import model.graph.exception.EdgeFoundException;
+import model.graph.exception.EdgeNotFoundException;
+import model.graph.exception.InvalidWeightException;
+import model.graph.exception.NodeArgumentEmptyException;
+import model.graph.exception.NodeArgumentNullException;
+import model.graph.exception.NodeFoundException;
+import model.graph.exception.NodeNotFoundException;
 
 public class Graph {
 	

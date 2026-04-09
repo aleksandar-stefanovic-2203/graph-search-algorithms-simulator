@@ -1,4 +1,4 @@
-package core.graph;
+package model.graph;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +6,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import core.graph.exception.*;
+import model.graph.Graph;
+import model.graph.Neighbor;
+import model.graph.exception.*;
 
 class GraphTest {
 

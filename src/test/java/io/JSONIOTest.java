@@ -1,9 +1,10 @@
 package io;
 
-import core.graph.Graph;
-import core.graph.Neighbor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+
+import model.graph.Graph;
+import model.graph.Neighbor;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
