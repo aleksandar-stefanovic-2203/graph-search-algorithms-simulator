@@ -1,0 +1,8 @@
+1. Visited node
+2. Unvisited node
+3. Visited node with value
+4. Unvisited node with value
+5. Unvisited node with value crossed
+6. Visited node with two values
+7. Unvisited node with two values
+8. Unvisited node with two values crossed
