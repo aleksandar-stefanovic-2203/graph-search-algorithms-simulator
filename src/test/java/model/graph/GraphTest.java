@@ -2,6 +2,7 @@ package model.graph;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -202,7 +203,7 @@ class GraphTest {
     }
 
     @Test
-    void getNeighborsReturnsCopyOfList() {
+    void getNeighborsReturnsUnmodifiableList() {
         Graph g = new Graph();
         g.addNode("A");
         g.addNode("B");
@@ -210,8 +211,6 @@ class GraphTest {
         g.addEdge("A", "B", 5);
 
         List<Neighbor> neighbors = g.getNeighbors("A");
-        neighbors.clear();
-
-        assertEquals(1, g.getNeighbors("A").size());
+        assertThrows(UnsupportedOperationException.class, () -> neighbors.clear());
     }
 }

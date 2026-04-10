@@ -8,7 +8,7 @@ public final class ValidationUtils {
 		if(strings == null) throw new IllegalArgumentException("Argument array must not be null.");
 		for(int i = 0; i < strings.length; i++) {
 			if(strings[i] == null) throw new NullArgumentException(i);
-			if(strings[i].isBlank()) throw new BlankArgumentException(i);
+			if(strings[i].trim().isEmpty()) throw new BlankArgumentException(i);
 		}
 	}
 	

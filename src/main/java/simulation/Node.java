@@ -1,25 +1,22 @@
 package simulation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import simulation.exception.NodeHasParentException;
 import utilities.ValidationUtils;
 
-public class Node { // TODO: add parent node
+public class Node {
 	
 	public Node(String name, int seqNum, int value) {
 		ValidationUtils.requireNonBlank(name);
 		this.name = name;
 		this.seqNum = seqNum;
 		this.value = value;
-		this.path = new ArrayList<Node>();
-		path.add(this);
+		this.parent = null;
 		this.children = new ArrayList<Node>();
 	}
-	
-	public Node(String name, int seqNum) {
-		this(name, seqNum, -1);
-	}	
 	
 	public String getName() {
 		return name;
@@ -33,32 +30,40 @@ public class Node { // TODO: add parent node
 		return value;
 	}
 	
+	public Node getParent() {
+		return parent;
+	}
+	
 	public List<Node> getPath() {
+		List<Node> path = new ArrayList<Node>();
+		Node current = this;
+		
+		while(current != null) {
+			path.add(current);
+			current = current.parent;
+		}
+		
+		Collections.reverse(path);
+		
 		return path;
-	}	
+	}
 	
 	public List<Node> getChildren() {
-		return children;
-	}	
+		return Collections.unmodifiableList(children);
+	}
 	
 	public void setSeqNum(int number) {
 		this.seqNum = number;
 	}
 	
-	protected void setPath(List<Node> path) {
-		this.path = path;
-	}
-	
 	public void addChild(Node node) {
 		ValidationUtils.requireNonNull(node);
+		if(node.parent != null) throw new NodeHasParentException(node.getName());
 		
 		this.children.add(node);
-		
-		List<Node> newPath = new ArrayList<Node>(this.path);
-		newPath.add(node);
-		node.setPath(newPath);
-	}
-	
+		node.parent = this;
+	}	
+
 	public Node cloneTree() {
 		Node copy = new Node(this.name, this.seqNum, this.value);
 		
@@ -73,6 +78,6 @@ public class Node { // TODO: add parent node
 	private int seqNum;
 	private final int value;
 	
-	private List<Node> path;
+	private Node parent;
 	private List<Node> children;
 }

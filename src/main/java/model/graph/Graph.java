@@ -1,6 +1,7 @@
 package model.graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class Graph {
 	
 	public Graph() {}
 	
-	public Map<String, List<Neighbor>> getAdjacencyList() {
+	public Map<String, List<Neighbor>> getAdjacencyList() { // TODO: remove this (if possible because of Jackson library)
 		return adjacencyList;
 	}
 
@@ -28,7 +29,7 @@ public class Graph {
 		ValidationUtils.requireNonBlank(node);
 		checkNodeFields(true, node);
 		
-		return new ArrayList<>(adjacencyList.get(node));
+		return Collections.unmodifiableList(adjacencyList.get(node));
 	}
 
 	public void addNode(String node) {
