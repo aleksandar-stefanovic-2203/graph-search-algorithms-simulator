@@ -6,9 +6,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import model.graph.Graph;
-import model.graph.Neighbor;
 import model.graph.exception.*;
+import utilities.exception.*;
 
 class GraphTest {
 
@@ -34,9 +33,9 @@ class GraphTest {
     void addNodeInvalidInput() {
         Graph g = new Graph();
 
-        assertThrows(NodeArgumentNullException.class, () -> g.addNode(null));
-        assertThrows(NodeArgumentEmptyException.class, () -> g.addNode(""));
-        assertThrows(NodeArgumentEmptyException.class, () -> g.addNode("   "));
+        assertThrows(NullArgumentException.class, () -> g.addNode(null));
+        assertThrows(BlankArgumentException.class, () -> g.addNode(""));
+        assertThrows(BlankArgumentException.class, () -> g.addNode("   "));
     }
 
     // -------------------- EDGE TESTS --------------------

@@ -1,5 +1,7 @@
 package model.graph;
 
+import utilities.ValidationUtils;
+
 public class Neighbor {
 	
 	public String getDestination() {
@@ -26,6 +28,7 @@ public class Neighbor {
 	public Neighbor() {}
 	
 	public Neighbor(String destination, int weight) {
+		ValidationUtils.requireNonBlank(destination);
 		this.destination = destination;
 		this.weight = weight;
 	}
