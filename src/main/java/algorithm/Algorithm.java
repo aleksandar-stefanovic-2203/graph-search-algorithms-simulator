@@ -30,9 +30,10 @@ public abstract class Algorithm {
 				
 				checkCondition(currNode, endNode);
 				
-				List<Neighbor> neighbors = graph.getNeighbors(currNode.getName()); // TODO: sort neighbors by some criteria
+				List<Neighbor> neighbors = graph.getNeighbors(currNode.getName());
+				List<Neighbor> sortedNeighbors = sortNeighbors(neighbors);
 				
-				for(Neighbor neighbor: neighbors) {
+				for(Neighbor neighbor: sortedNeighbors) {
 					if(onPath(currNode.getPath(), neighbor.getDestination())) continue;
 					
 					int value = generateValue(currNode, neighbor);
@@ -49,10 +50,14 @@ public abstract class Algorithm {
 		}
 		
 		return steps;
-	}
+	}	
 
 	protected void checkCondition(Node currNode, String endNode) throws AlgorithmFinishedException {
 		if(currNode.getName().equals(endNode)) throw new AlgorithmFinishedException();
+	}
+	
+	protected List<Neighbor> sortNeighbors(List<Neighbor> neighbors){
+		return neighbors;
 	}
 
 	protected int generateValue(Node currNode, Neighbor neighbor) {
