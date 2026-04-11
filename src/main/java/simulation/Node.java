@@ -72,7 +72,7 @@ public class Node {
 		}
 		
 		return copy;
-	}	
+	}
 
 	private final String name;
 	private int seqNum;
