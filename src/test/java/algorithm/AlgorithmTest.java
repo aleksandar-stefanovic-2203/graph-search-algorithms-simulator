@@ -77,6 +77,21 @@ public class AlgorithmTest {
         assertEquals(List.of("S", "A", "C", "E", "G"), nodes);
         assertEquals(17, trace.getPrice());
     }
+    
+    @Test
+    void BandBFromSToG(){
+    	Algorithm dfs = new BranchAndBoundAlgorithm();
+        ExecutionTrace trace = dfs.execute(graph, "S", "G");
+
+        assertFalse(trace.getSteps().isEmpty());
+        assertNotNull(trace.getPath());
+        List<String> nodes = new ArrayList<String>();
+        for(Node node: trace.getPath()) {
+        	nodes.add(node.getName());
+        }
+        assertEquals(List.of("S", "A", "E", "C", "F", "G"), nodes);
+        assertEquals(9, trace.getPrice());
+    }
 
     private static void addUndirectedEdge(String from, String to, int weight) {
         graph.addEdge(from, to, weight);
