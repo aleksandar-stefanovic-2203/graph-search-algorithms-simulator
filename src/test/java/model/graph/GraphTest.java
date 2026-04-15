@@ -11,7 +11,7 @@ import utilities.exception.*;
 
 class GraphTest { // TODO: update test for new methods
 
-    // -------------------- NODE TESTS --------------------
+    // -------------------- ADD NODE --------------------
 
     @Test
     void addNodeValid() {
@@ -38,7 +38,7 @@ class GraphTest { // TODO: update test for new methods
         assertThrows(BlankArgumentException.class, () -> g.addNode("   "));
     }
 
-    // -------------------- EDGE TESTS --------------------
+    // -------------------- ADD EDGE --------------------
 
     @Test
     void addEdgeValid() {
@@ -211,5 +211,51 @@ class GraphTest { // TODO: update test for new methods
 
         List<Neighbor> neighbors = g.getNeighbors("A");
         assertThrows(UnsupportedOperationException.class, () -> neighbors.clear());
+    }
+    
+    // ------------------------------ NODE EXISTS ------------------------------
+    
+    @Test
+    void nodeExistsInGraph() {
+    	Graph g = new Graph();
+    	g.addNode("A");
+    	
+    	assertTrue(g.nodeExists("A"));
+    }
+    
+    @Test
+    void nodeDoesNotExistInGraph() {
+    	Graph g = new Graph();
+    	
+    	assertFalse(g.nodeExists("A"));
+    }
+    
+    // ------------------------------ GET EDGE WEIGHT ------------------------------
+    
+    @Test
+    void getEdgeWeight() {
+    	Graph g = new Graph();
+    	g.addNode("A");
+    	g.addNode("B");
+    	g.addEdge("A", "B", 5);
+    	
+    	assertEquals(5, g.getEdgeWeight("A", "B"));
+    }
+    
+    // ------------------------------ GET PATH PRICE ------------------------------
+    
+    @Test
+    void getPathPrice() {
+    	Graph g = new Graph();
+    	g.addNode("A");
+    	g.addNode("B");
+    	g.addNode("C");
+    	g.addNode("D");
+    	
+    	g.addEdge("A", "B", 5);
+    	g.addEdge("B", "C", 3);
+    	g.addEdge("C", "D", 7);
+    	
+    	assertEquals(15, g.getPathPrice(List.of("A", "B", "C", "D")));
     }
 }
