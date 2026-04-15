@@ -8,6 +8,7 @@ import java.util.Map;
 
 import model.graph.exception.EdgeFoundException;
 import model.graph.exception.EdgeNotFoundException;
+import model.graph.exception.InvalidPathException;
 import model.graph.exception.InvalidWeightException;
 import model.graph.exception.NodeFoundException;
 import model.graph.exception.NodeNotFoundException;
@@ -30,6 +31,34 @@ public class Graph {
 		checkNodeFields(true, node);
 		
 		return Collections.unmodifiableList(adjacencyList.get(node));
+	}
+	
+	public int getPathPrice(List<String> nodes) {
+		ValidationUtils.requireNonNull(nodes);
+		if(nodes.size() == 0) throw new InvalidPathException();
+		ValidationUtils.requireNonBlank(nodes.toArray(String[]::new));
+		
+		String prev = nodes.get(0);
+		String next = null;
+		int price = 0;
+		for(int i = 1; i < nodes.size(); i++) {
+			next = nodes.get(i);
+			price += getEdgeWeight(prev, next);
+			
+			prev = next;
+		}
+		
+		return price;
+	}
+	
+	public int getEdgeWeight(String startNode, String endNode) {
+		ValidationUtils.requireNonBlank(startNode, endNode);
+		checkNodeFields(true, startNode, endNode);
+		
+		List<Neighbor> neighbors = adjacencyList.get(startNode);
+		Neighbor neighbor = checkIfNeighborExists(neighbors, endNode);
+		
+		return neighbor.getWeight();
 	}
 
 	public void addNode(String node) {

@@ -2,7 +2,6 @@ package model.graph;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import model.graph.exception.*;
 import utilities.exception.*;
 
-class GraphTest {
+class GraphTest { // TODO: update test for new methods
 
     // -------------------- NODE TESTS --------------------
 

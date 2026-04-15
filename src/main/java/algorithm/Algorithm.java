@@ -7,12 +7,11 @@ import algorithm.exception.AlgorithmFinishedException;
 import model.graph.Graph;
 import model.graph.Neighbor;
 import model.graph.exception.NodeNotFoundException;
-import simulation.Node;
-import simulation.Step;
+import simulation.*;
 import utilities.ValidationUtils;
 
 public abstract class Algorithm {
-	public final List<Step> execute(Graph graph, String startNode, String endNode){
+	public final ExecutionTrace execute(Graph graph, String startNode, String endNode){
 		validateInputs(graph, startNode, endNode);
 		
 		List<Step> steps = new ArrayList<Step>();
@@ -22,10 +21,14 @@ public abstract class Algorithm {
 		
 		frontierPut(root);
 		
+		ExecutionTrace result = new ExecutionTrace();
+		result.setSteps(steps);
+		
 		int seqNum = 1;
+		Node currNode = null;
 		try {
 			while(!frontierEmpty()) {
-				Node currNode = frontierGet();
+				currNode = frontierGet();
 				currNode.setSeqNum(seqNum);
 				
 				checkCondition(currNode, endNode);
@@ -47,9 +50,17 @@ public abstract class Algorithm {
 			}
 		} catch (AlgorithmFinishedException e) {
 			updateSteps(steps, root);
+			result.setPath(currNode.getPath());
+			
+			List<String> nodes = new ArrayList<String>();
+	        for(Node node: currNode.getPath()) {
+	        	nodes.add(node.getName());
+	        }
+	        
+	        result.setPrice(graph.getPathPrice(nodes));
 		}
 		
-		return steps;
+		return result;
 	}	
 
 	protected void checkCondition(Node currNode, String endNode) throws AlgorithmFinishedException {
