@@ -3,8 +3,8 @@ package io;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import model.graph.Graph;
-import model.graph.Neighbor;
+import graph.Graph;
+import graph.Neighbor;
 
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;

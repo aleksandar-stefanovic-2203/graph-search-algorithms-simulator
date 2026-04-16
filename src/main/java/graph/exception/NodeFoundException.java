@@ -1,4 +1,4 @@
-package model.graph.exception;
+package graph.exception;
 
 @SuppressWarnings("serial")
 public class NodeFoundException extends RuntimeException {

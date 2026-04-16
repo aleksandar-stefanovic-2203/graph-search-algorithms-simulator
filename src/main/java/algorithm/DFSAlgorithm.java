@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
-import model.graph.Neighbor;
+import graph.Neighbor;
 import simulation.Node;
 
 public class DFSAlgorithm extends Algorithm {

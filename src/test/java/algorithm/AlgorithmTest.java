@@ -10,7 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import model.graph.Graph;
+import graph.Graph;
 import simulation.ExecutionTrace;
 import simulation.Node;
 

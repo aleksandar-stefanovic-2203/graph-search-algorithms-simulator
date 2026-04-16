@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.graph.Graph;
+import graph.Graph;
 
 public class JSONGraphIO extends GraphIO {	
 	

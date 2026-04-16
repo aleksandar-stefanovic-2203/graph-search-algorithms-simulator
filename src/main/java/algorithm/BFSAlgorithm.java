@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Queue;
 
-import model.graph.Neighbor;
+import graph.Neighbor;
 import simulation.Node;
 
 public class BFSAlgorithm extends Algorithm {

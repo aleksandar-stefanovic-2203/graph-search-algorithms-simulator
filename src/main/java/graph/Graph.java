@@ -1,4 +1,4 @@
-package model.graph;
+package graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import model.graph.exception.EdgeFoundException;
-import model.graph.exception.EdgeNotFoundException;
-import model.graph.exception.InvalidPathException;
-import model.graph.exception.InvalidWeightException;
-import model.graph.exception.NodeFoundException;
-import model.graph.exception.NodeNotFoundException;
+import graph.exception.EdgeFoundException;
+import graph.exception.EdgeNotFoundException;
+import graph.exception.InvalidPathException;
+import graph.exception.InvalidWeightException;
+import graph.exception.NodeFoundException;
+import graph.exception.NodeNotFoundException;
 import utilities.ValidationUtils;
 
 public class Graph {

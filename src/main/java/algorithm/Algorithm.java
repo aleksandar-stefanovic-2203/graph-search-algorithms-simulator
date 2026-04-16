@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import algorithm.exception.AlgorithmFinishedException;
-import model.graph.Graph;
-import model.graph.Neighbor;
-import model.graph.exception.NodeNotFoundException;
+import graph.Graph;
+import graph.Neighbor;
+import graph.exception.NodeNotFoundException;
 import simulation.*;
 import utilities.ValidationUtils;
 

@@ -2,11 +2,14 @@ package model.graph;
 
 import org.junit.jupiter.api.Test;
 
+import graph.Graph;
+import graph.Neighbor;
+import graph.exception.*;
+
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import model.graph.exception.*;
 import utilities.exception.*;
 
 class GraphTest { // TODO: update test for new methods

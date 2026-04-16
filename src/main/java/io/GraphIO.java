@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
-import model.graph.Graph;
+import graph.Graph;
 
 public abstract class GraphIO {
 	
